@@ -1,0 +1,36 @@
+/*
+ * @(#)CorsConfig.java 2021/05/30
+ *
+ * Copyright 2021 Won. All rights Reserved.
+ * Won PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ */
+
+package com.example.tutorial.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
+
+/**
+ * @author won greente515@gmail.com
+ * @since 2021/05/30
+ */
+
+@Configuration
+public class CorsConfig {
+
+    @Bean
+    public CorsFilter corsFilter() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        config.addAllowedOrigin("*");
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("*");
+
+        source.registerCorsConfiguration("/api/**", config);
+        return new CorsFilter(source);
+    }
+}
